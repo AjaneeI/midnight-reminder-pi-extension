@@ -57,7 +57,7 @@ describe('integration tests', () => {
       callCount++;
     });
 
-    // Start with a very short interval for testing
+    // Activate the extension to start the polling timer
     ext.activate();
 
     // Immediately deactivate

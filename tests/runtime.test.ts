@@ -14,17 +14,22 @@ describe('runtime timing behavior', () => {
     const storage = new InMemoryStorage();
     const clock = new FakeClock(new Date('2024-01-14T23:55:00'));
     const ext = new MidnightReminderExtension(clock, storage);
-    ext.activate();
 
-    // Before midnight: not inside reminder window
-    const beforeMidnight = ext.checkAndRemind();
-    expect(beforeMidnight).toBe(false);
+    try {
+      ext.activate();
 
-    // Midnight passes to Jan 15
-    clock.setTime(new Date('2024-01-15T00:00:00'));
+      // Before midnight: not inside reminder window
+      const beforeMidnight = ext.checkAndRemind();
+      expect(beforeMidnight).toBe(false);
 
-    // Next check after midnight: now inside the window
-    const afterMidnight = ext.checkAndRemind();
-    expect(afterMidnight).toBe(true);
+      // Midnight passes to Jan 15
+      clock.setTime(new Date('2024-01-15T00:00:00'));
+
+      // Next check after midnight: now inside the window
+      const afterMidnight = ext.checkAndRemind();
+      expect(afterMidnight).toBe(true);
+    } finally {
+      ext.deactivate();
+    }
   });
 });

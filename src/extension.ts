@@ -1,6 +1,6 @@
 import { Clock } from './clock.js';
 import { Storage } from './storage.js';
-import { shouldRemind } from './policy.js';
+import { shouldRemind, formatDate } from './policy.js';
 
 /**
  * Midnight Reminder Pi Extension.
@@ -35,10 +35,7 @@ export class MidnightReminderExtension {
     const lastDate = this._storage.getLastRemindedDate();
 
     if (shouldRemind(now, lastDate)) {
-      const year = now.getFullYear();
-      const month = String(now.getMonth() + 1).padStart(2, '0');
-      const day = String(now.getDate()).padStart(2, '0');
-      const today = `${year}-${month}-${day}`;
+      const today = formatDate(now);
       this._storage.setLastRemindedDate(today);
       this._onRemind?.();
       return true;
