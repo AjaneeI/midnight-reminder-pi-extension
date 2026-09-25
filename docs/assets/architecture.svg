@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="760" viewBox="0 0 1600 760" role="img" aria-labelledby="title desc">
+<title id="title">Midnight Reminder system architecture</title>
+<desc id="desc">Pi Runtime loads a thin runtime adapter that creates the core engine. The core engine depends on Clock, Policy, and Storage, while Storage persists the last reminded date and the core engine triggers the Pi UI notification.</desc>
+<rect width="1600" height="760" rx="28" fill="#0E0D0C"/>
+<text x="72" y="82" fill="#B66A45" font-family="Inter,system-ui,sans-serif" font-size="17" font-weight="700" letter-spacing="2.2">SYSTEM ARCHITECTURE</text>
+<text x="72" y="132" fill="#F4E9DA" font-family="Inter,system-ui,sans-serif" font-size="38" font-weight="750">Runtime shell outside. Testable policy inside.</text>
+<text x="72" y="172" fill="#B1A598" font-family="Inter,system-ui,sans-serif" font-size="20">The Pi-specific adapter stays thin while time, policy, and persistence remain independently testable.</text>
+
+<g font-family="Inter,system-ui,sans-serif">
+  <g>
+    <rect x="72" y="260" width="260" height="132" rx="22" fill="#181613" stroke="#3C3732"/>
+    <text x="94" y="302" fill="#F4E9DA" font-size="22" font-weight="700">Pi Runtime</text>
+    <text x="94" y="338" fill="#B1A598" font-size="15">session_start / session_shutdown</text>
+  </g>
+  <text x="366" y="338" fill="#B66A45" font-size="30" font-weight="700">→</text>
+  <g>
+    <rect x="420" y="260" width="350" height="132" rx="22" fill="#7A2E3A" stroke="#B66A45"/>
+    <text x="442" y="302" fill="#F4E9DA" font-size="22" font-weight="700">Runtime Adapter</text>
+    <text x="442" y="338" fill="#F4E9DA" font-size="15">.pi/extensions/midnight-reminder.ts</text>
+  </g>
+  <text x="804" y="338" fill="#B66A45" font-size="30" font-weight="700">→</text>
+  <g>
+    <rect x="858" y="260" width="300" height="132" rx="22" fill="#181613" stroke="#3C3732"/>
+    <text x="880" y="302" fill="#F4E9DA" font-size="22" font-weight="700">Core Engine</text>
+    <text x="880" y="338" fill="#B1A598" font-size="15">MidnightReminderExtension</text>
+  </g>
+  <text x="1192" y="338" fill="#B66A45" font-size="30" font-weight="700">→</text>
+  <g>
+    <rect x="1240" y="260" width="288" height="132" rx="22" fill="#181613" stroke="#3C3732"/>
+    <text x="1262" y="302" fill="#F4E9DA" font-size="22" font-weight="700">Pi UI</text>
+    <text x="1262" y="338" fill="#B1A598" font-size="15">visible notification callback</text>
+  </g>
+
+  <text x="72" y="478" fill="#82786F" font-size="14" font-weight="700" letter-spacing="1.6">TESTABLE DEPENDENCIES</text>
+  <g>
+    <rect x="72" y="510" width="250" height="118" rx="20" fill="#181613" stroke="#3C3732"/>
+    <text x="94" y="550" fill="#F4E9DA" font-size="21" font-weight="700">Clock</text>
+    <text x="94" y="583" fill="#B1A598" font-size="15">supplies current local time</text>
+  </g>
+  <g>
+    <rect x="350" y="510" width="250" height="118" rx="20" fill="#181613" stroke="#3C3732"/>
+    <text x="372" y="550" fill="#F4E9DA" font-size="21" font-weight="700">Policy</text>
+    <text x="372" y="583" fill="#B1A598" font-size="15">window + duplicate decision</text>
+  </g>
+  <g>
+    <rect x="628" y="510" width="280" height="118" rx="20" fill="#181613" stroke="#3C3732"/>
+    <text x="650" y="550" fill="#F4E9DA" font-size="21" font-weight="700">Storage</text>
+    <text x="650" y="583" fill="#B1A598" font-size="15">last-reminded calendar date</text>
+  </g>
+  <g>
+    <rect x="936" y="510" width="380" height="118" rx="20" fill="#181613" stroke="#3C3732"/>
+    <text x="958" y="550" fill="#F4E9DA" font-size="21" font-weight="700">State File</text>
+    <text x="958" y="583" fill="#B1A598" font-size="15">.pi/midnight-reminder-state.json</text>
+  </g>
+
+  <text x="72" y="680" fill="#B66A45" font-size="16" font-weight="700">Injected into Core Engine</text>
+  <text x="304" y="680" fill="#B66A45" font-size="22" font-weight="700">→</text>
+  <text x="350" y="680" fill="#F4E9DA" font-size="16" font-weight="650">Clock + Policy + Storage</text>
+  <text x="72" y="718" fill="#82786F" font-size="15">Persistence crosses Pi sessions; the time policy stays independent from Pi.</text>
+</g>
+</svg>
