@@ -14,6 +14,7 @@ export class MidnightReminderExtension {
   constructor(
     private _clock: Clock,
     private _storage: Storage,
+    private _onRemind?: () => void,
   ) {}
 
   /**
@@ -39,6 +40,7 @@ export class MidnightReminderExtension {
       const day = String(now.getDate()).padStart(2, '0');
       const today = `${year}-${month}-${day}`;
       this._storage.setLastRemindedDate(today);
+      this._onRemind?.();
       return true;
     }
 
