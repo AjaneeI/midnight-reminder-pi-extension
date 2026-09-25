@@ -1,0 +1,19 @@
+{
+  "name": "midnight-reminder-pi-extension",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@types/node": "^26.6.2",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.2"
+  }
+}
