@@ -1,54 +1,41 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="680" viewBox="0 0 1600 680" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1080" viewBox="0 0 720 1080" role="img" aria-labelledby="title desc">
 <title id="title">Midnight Reminder decision flow</title>
-<desc id="desc">The extension reads local time, checks whether it is within midnight to 6 AM, checks whether a reminder was already sent today, then persists today's date before notifying. Outside the window or after a same-day reminder, it does nothing.</desc>
-<rect width="1600" height="680" rx="28" fill="#0E0D0C"/>
-<text x="72" y="82" fill="#B66A45" font-family="Inter,system-ui,sans-serif" font-size="17" font-weight="700" letter-spacing="2.2">REMINDER DECISION FLOW</text>
-<text x="72" y="132" fill="#F4E9DA" font-family="Inter,system-ui,sans-serif" font-size="38" font-weight="750">One path fires. Every other path stays quiet.</text>
-<text x="72" y="172" fill="#B1A598" font-family="Inter,system-ui,sans-serif" font-size="20">Time window first. Duplicate prevention second. Persistence happens before notification.</text>
+<desc id="desc">Read local time. If outside midnight to 6 AM, do nothing. If inside the window but already reminded today, do nothing. Otherwise persist today's date and show the Pi reminder notification.</desc>
+<rect width="720" height="1080" rx="24" fill="#0E0D0C"/>
+<text x="44" y="62" fill="#B66A45" font-family="Inter,system-ui,sans-serif" font-size="16" font-weight="700" letter-spacing="2">REMINDER DECISION FLOW</text>
+<text x="44" y="106" fill="#F4E9DA" font-family="Inter,system-ui,sans-serif" font-size="34" font-weight="750">One path fires.</text>
+<text x="44" y="144" fill="#B1A598" font-family="Inter,system-ui,sans-serif" font-size="18">Everything else stays quiet.</text>
 
 <g font-family="Inter,system-ui,sans-serif">
-  <g>
-    <rect x="72" y="270" width="250" height="126" rx="22" fill="#181613" stroke="#3C3732"/>
-    <text x="94" y="311" fill="#F4E9DA" font-size="20" font-weight="700">1  Read local time</text>
-    <text x="94" y="346" fill="#B1A598" font-size="15">Clock.now()</text>
-  </g>
-  <text x="348" y="341" fill="#B66A45" font-size="28" font-weight="700">→</text>
-  <g>
-    <rect x="402" y="270" width="310" height="126" rx="22" fill="#181613" stroke="#3C3732"/>
-    <text x="424" y="311" fill="#F4E9DA" font-size="20" font-weight="700">2  In 00:00–06:00?</text>
-    <text x="424" y="346" fill="#B1A598" font-size="15">half-open interval [00:00, 06:00)</text>
-  </g>
-  <text x="738" y="341" fill="#B66A45" font-size="28" font-weight="700">→</text>
-  <g>
-    <rect x="792" y="270" width="280" height="126" rx="22" fill="#181613" stroke="#3C3732"/>
-    <text x="814" y="311" fill="#F4E9DA" font-size="20" font-weight="700">3  Reminded today?</text>
-    <text x="814" y="346" fill="#B1A598" font-size="15">compare YYYY-MM-DD</text>
-  </g>
-  <text x="1098" y="341" fill="#B66A45" font-size="28" font-weight="700">→</text>
-  <g>
-    <rect x="1152" y="270" width="240" height="126" rx="22" fill="#7A2E3A" stroke="#B66A45"/>
-    <text x="1174" y="311" fill="#F4E9DA" font-size="20" font-weight="700">4  Persist date</text>
-    <text x="1174" y="346" fill="#F4E9DA" font-size="15">write before notifying</text>
-  </g>
-  <text x="1418" y="341" fill="#B66A45" font-size="28" font-weight="700">→</text>
-  <g>
-    <rect x="1468" y="270" width="100" height="126" rx="22" fill="#181613" stroke="#3C3732"/>
-    <text x="1486" y="311" fill="#F4E9DA" font-size="19" font-weight="700">5</text>
-    <text x="1486" y="342" fill="#F4E9DA" font-size="16" font-weight="700">Notify</text>
-    <text x="1486" y="370" fill="#B1A598" font-size="13">Pi UI</text>
-  </g>
+  <rect x="82" y="196" width="556" height="92" rx="20" fill="#181613" stroke="#3C3732"/>
+  <text x="112" y="236" fill="#F4E9DA" font-size="24" font-weight="700">1 · Read local time</text>
+  <text x="112" y="266" fill="#B1A598" font-size="18">Clock.now()</text>
 
-  <g font-size="15" font-weight="650">
-    <rect x="402" y="448" width="310" height="42" rx="21" fill="#201D1A" stroke="#3C3732"/>
-    <text x="557" y="475" text-anchor="middle" fill="#B1A598">OUTSIDE WINDOW  →  NO ACTION</text>
-    <rect x="792" y="448" width="320" height="42" rx="21" fill="#201D1A" stroke="#3C3732"/>
-    <text x="952" y="475" text-anchor="middle" fill="#B1A598">ALREADY REMINDED  →  NO ACTION</text>
-    <rect x="1152" y="448" width="300" height="42" rx="21" fill="#7A2E3A" stroke="#B66A45"/>
-    <text x="1302" y="475" text-anchor="middle" fill="#F4E9DA">ELIGIBLE  →  REMINDER FIRES ONCE</text>
-  </g>
+  <text x="360" y="326" text-anchor="middle" fill="#B66A45" font-size="26" font-weight="700">↓</text>
 
-  <text x="72" y="560" fill="#82786F" font-size="14" font-weight="700" letter-spacing="1.5">BOUNDARY CASES VERIFIED</text>
-  <text x="72" y="600" fill="#F4E9DA" font-size="20" font-weight="650">23:59  quiet     00:00  remind     05:59  remind     06:00  quiet</text>
-  <text x="72" y="638" fill="#82786F" font-size="15">Cross-session state prevents duplicate reminders after reopening Pi on the same calendar date.</text>
+  <rect x="82" y="350" width="556" height="104" rx="20" fill="#181613" stroke="#3C3732"/>
+  <text x="112" y="392" fill="#F4E9DA" font-size="24" font-weight="700">2 · Inside [00:00, 06:00)?</text>
+  <text x="112" y="426" fill="#B1A598" font-size="18">No → no action</text>
+
+  <text x="360" y="490" text-anchor="middle" fill="#B66A45" font-size="26" font-weight="700">↓ yes</text>
+
+  <rect x="82" y="514" width="556" height="104" rx="20" fill="#181613" stroke="#3C3732"/>
+  <text x="112" y="556" fill="#F4E9DA" font-size="24" font-weight="700">3 · Already reminded today?</text>
+  <text x="112" y="590" fill="#B1A598" font-size="18">Yes → no duplicate</text>
+
+  <text x="360" y="654" text-anchor="middle" fill="#B66A45" font-size="26" font-weight="700">↓ no</text>
+
+  <rect x="82" y="678" width="556" height="96" rx="20" fill="#7A2E3A" stroke="#B66A45"/>
+  <text x="112" y="718" fill="#F4E9DA" font-size="24" font-weight="700">4 · Persist today's date</text>
+  <text x="112" y="748" fill="#F4E9DA" font-size="18">Write state before notifying</text>
+
+  <text x="360" y="812" text-anchor="middle" fill="#B66A45" font-size="26" font-weight="700">↓</text>
+
+  <rect x="82" y="836" width="556" height="96" rx="20" fill="#7A2E3A" stroke="#B66A45"/>
+  <text x="112" y="876" fill="#F4E9DA" font-size="24" font-weight="700">5 · Show Pi notification</text>
+  <text x="112" y="906" fill="#F4E9DA" font-size="18">Reminder fires once</text>
+
+  <text x="44" y="986" fill="#82786F" font-size="15" font-weight="700" letter-spacing="1.4">BOUNDARIES VERIFIED</text>
+  <text x="44" y="1024" fill="#F4E9DA" font-size="20" font-weight="650">23:59 quiet · 00:00 remind · 05:59 remind · 06:00 quiet</text>
 </g>
 </svg>

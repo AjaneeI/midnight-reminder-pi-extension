@@ -1,32 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="600" viewBox="0 0 1600 600" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="340" viewBox="0 0 720 340" role="img" aria-labelledby="title desc">
 <title id="title">Midnight Reminder</title>
-<desc id="desc">A polished hero graphic for the Midnight Reminder Pi Extension showing the late-night reminder window, test status, TypeScript status, persistence, and Pi runtime verification.</desc>
-<rect width="1600" height="600" rx="28" fill="#0E0D0C"/>
-<rect x="64" y="58" width="8" height="484" rx="4" fill="#B66A45"/>
-<text x="104" y="102" fill="#B66A45" font-family="Inter,system-ui,sans-serif" font-size="18" font-weight="700" letter-spacing="2.4">MIDNIGHT REMINDER</text>
-<text x="104" y="192" fill="#F4E9DA" font-family="Inter,system-ui,sans-serif" font-size="66" font-weight="750">Precise reminders.</text>
-<text x="104" y="270" fill="#F4E9DA" font-family="Inter,system-ui,sans-serif" font-size="66" font-weight="750">No duplicate noise.</text>
-<text x="104" y="336" fill="#B1A598" font-family="Inter,system-ui,sans-serif" font-size="24">A test-driven Pi extension for a small but exact late-night policy.</text>
-<text x="104" y="374" fill="#B1A598" font-family="Inter,system-ui,sans-serif" font-size="24">Persistent state across sessions. Behavior verified at the boundaries.</text>
-
-<g font-family="Inter,system-ui,sans-serif" font-size="15" font-weight="650">
-  <rect x="104" y="426" width="192" height="42" rx="21" fill="#7A2E3A" stroke="#B66A45"/>
-  <text x="200" y="453" text-anchor="middle" fill="#F4E9DA">00:00–06:00 local</text>
-  <rect x="312" y="426" width="168" height="42" rx="21" fill="#201D1A" stroke="#3C3732"/>
-  <text x="396" y="453" text-anchor="middle" fill="#B1A598">12 tests passing</text>
-  <rect x="496" y="426" width="170" height="42" rx="21" fill="#201D1A" stroke="#3C3732"/>
-  <text x="581" y="453" text-anchor="middle" fill="#B1A598">TypeScript clean</text>
-  <rect x="682" y="426" width="196" height="42" rx="21" fill="#201D1A" stroke="#3C3732"/>
-  <text x="780" y="453" text-anchor="middle" fill="#B1A598">Pi runtime verified</text>
-</g>
-
-<text x="104" y="526" fill="#82786F" font-family="Inter,system-ui,sans-serif" font-size="14" font-weight="650" letter-spacing="1.2">AJANEE IGHARO  /  CS 697 INDUSTRY AI APPLICATIONS LAB</text>
-
-<circle cx="1350" cy="220" r="98" fill="#F4E9DA"/>
-<circle cx="1402" cy="190" r="98" fill="#0E0D0C"/>
-<text x="1260" y="385" fill="#B66A45" font-family="Inter,system-ui,sans-serif" font-size="18" font-weight="700">00:00</text>
-<text x="1430" y="385" fill="#82786F" font-family="Inter,system-ui,sans-serif" font-size="18" font-weight="700">06:00</text>
-<rect x="1260" y="408" width="250" height="3" rx="2" fill="#3C3732"/>
-<rect x="1260" y="408" width="132" height="3" rx="2" fill="#B66A45"/>
-<text x="1260" y="455" fill="#82786F" font-family="Inter,system-ui,sans-serif" font-size="14" letter-spacing="1.4">ACTIVE WINDOW</text>
+<desc id="desc">Midnight Reminder, a test-driven Pi extension for precise late-night reminders with persistent duplicate prevention.</desc>
+<rect width="720" height="340" rx="24" fill="#0E0D0C"/>
+<rect x="36" y="34" width="6" height="272" rx="3" fill="#B66A45"/>
+<text x="66" y="66" fill="#B66A45" font-family="Inter,system-ui,sans-serif" font-size="16" font-weight="700" letter-spacing="2">MIDNIGHT REMINDER</text>
+<text x="66" y="126" fill="#F4E9DA" font-family="Inter,system-ui,sans-serif" font-size="42" font-weight="750">Precise reminders.</text>
+<text x="66" y="178" fill="#F4E9DA" font-family="Inter,system-ui,sans-serif" font-size="42" font-weight="750">No duplicate noise.</text>
+<text x="66" y="224" fill="#B1A598" font-family="Inter,system-ui,sans-serif" font-size="20">Test-driven Pi extension · persistent state · exact boundaries</text>
+<rect x="66" y="254" width="198" height="38" rx="19" fill="#7A2E3A" stroke="#B66A45"/>
+<text x="165" y="279" text-anchor="middle" fill="#F4E9DA" font-family="Inter,system-ui,sans-serif" font-size="17" font-weight="650">00:00–06:00 local</text>
+<circle cx="600" cy="116" r="56" fill="#F4E9DA"/>
+<circle cx="629" cy="98" r="56" fill="#0E0D0C"/>
+<rect x="548" y="214" width="118" height="3" rx="2" fill="#3C3732"/>
+<rect x="548" y="214" width="64" height="3" rx="2" fill="#B66A45"/>
+<text x="548" y="246" fill="#B66A45" font-family="Inter,system-ui,sans-serif" font-size="15" font-weight="700">00:00</text>
+<text x="622" y="246" fill="#82786F" font-family="Inter,system-ui,sans-serif" font-size="15" font-weight="700">06:00</text>
 </svg>
