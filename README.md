@@ -28,8 +28,8 @@ This project was developed as a **single-agent coding lab** with explicit requir
 | --- | --- |
 | Reminder window | `00:00 <= time < 06:00` local |
 | Duplicate protection | Persists across Pi sessions |
-| Tests | **12 passing** across 4 files |
-| Type safety | `tsc --noEmit` clean |
+| Tests | **20 passing** across 5 files |
+| Type safety | `tsc --noEmit` includes the Pi entry point |
 | Runtime | Pi session lifecycle + visible UI callback |
 | Demo | Safe command that does not mutate reminder state |
 
@@ -78,7 +78,7 @@ The policy intentionally uses a half-open interval: **`[00:00, 06:00)`**.
 
 **Persist before notifying.** The date is stored before the UI callback fires, reducing the chance of duplicate notifications if later work fails.
 
-**Keep the demo safe.** `/midnight-reminder-demo` proves the visible notification path without checking the real clock or changing persisted reminder state.
+**Keep the demo safe.** `/bedtime-test` (also available as `/midnight-reminder-demo`) proves the visible notification path without checking the real clock or changing persisted reminder state.
 
 **Clean up session resources.** The polling interval stops during `session_shutdown`; persisted reminder state remains.
 
@@ -87,8 +87,8 @@ The policy intentionally uses a half-open interval: **`[00:00, 06:00)`**.
 ### Verified test result
 
 ```text
-Test Files  4 passed (4)
-Tests       12 passed (12)
+Test Files  5 passed (5)
+Tests       20 passed (20)
 TypeScript  No errors
 ```
 
@@ -104,10 +104,16 @@ TypeScript  No errors
 
 ## Demo
 
-Start Pi from this repository and run:
+Start Pi from this repository (requires Pi installed on your PATH):
+
+```bash
+pi --no-extensions -e ./.pi/extensions/midnight-reminder.ts --approve
+```
+
+Then enter this **inside Pi**:
 
 ```text
-/midnight-reminder-demo
+/bedtime-test
 ```
 
 Expected visible notification:
@@ -116,17 +122,29 @@ Expected visible notification:
 🌙 It's midnight — time for your reminder! (DEMO)
 ```
 
-The demo command is deliberately separate from the production policy and persistence path.
+`/midnight-reminder-demo` remains an alias. Both commands preview the UI without reading the clock or changing reminder state. Repeating a preview is intentional; automatic reminders still follow the once-per-date policy.
+
+For the deterministic simulated-time demonstration, run this **in your shell**:
+
+```bash
+npm run demo
+```
+
+This runs eight adapter tests with a fake system clock and real file-backed storage in a fresh temporary directory. It prints asserted results for 23:59, midnight, 120 same-date polling checks, reopening the session, and the next date. The Pi API is a test harness; production adapter, engine, policy, and storage code run unchanged. This does not change your computer's clock or the project's real reminder file.
+
+See [the silent recording walkthrough](docs/HW3-DEMO.md) for exact commands, captions, and a 100-second recording plan. The video is a separate submission artifact; this repository does not yet contain a recorded video.
 
 ## Run locally
 
+Use Node.js compatible with the locked development dependencies (verified with Node 26.7.0 and npm 11.19.0). The Pi SDK development dependency is pinned to 0.87.1 so the entry point and test harness are checked against its real API types.
+
 ```bash
-npm install
+npm ci
 npm test
 npm run typecheck
 ```
 
-Then start Pi from the repository so it can load the project-local extension in `.pi/extensions/`.
+The typecheck covers `src/`, `tests/`, and `.pi/extensions/`. Pi normally auto-discovers `.pi/extensions/` when started here; the explicit command above disables other extension discovery and loads this extension once.
 
 ## Project map
 
@@ -136,6 +154,7 @@ Then start Pi from the repository so it can load the project-local extension in 
 │   └── extensions/
 │       └── midnight-reminder.ts
 ├── docs/
+│   ├── HW3-DEMO.md
 │   └── assets/
 │       ├── architecture.svg
 │       ├── decision-flow.svg
@@ -148,6 +167,7 @@ Then start Pi from the repository so it can load the project-local extension in 
 │   └── storage.ts
 ├── tests/
 │   ├── fakes/
+│   ├── bedtime-demo.test.ts
 │   ├── duplicate-prevention.test.ts
 │   ├── integration.test.ts
 │   ├── runtime.test.ts
@@ -164,6 +184,6 @@ The complete behavioral contract, acceptance criteria, persistence rules, pollin
 <details>
 <summary><strong>Coursework provenance</strong></summary>
 
-The functional homework implementation was complete at commit [`fd6bacf`](https://github.com/AjaneeI/midnight-reminder-pi-extension/commit/fd6bacf15650c35e6b3d7105f8e57d56ee081abc). Later commits are presentation and documentation improvements unless explicitly noted otherwise.
+The functional homework implementation was complete at commit [`fd6bacf`](https://github.com/AjaneeI/midnight-reminder-pi-extension/commit/fd6bacf15650c35e6b3d7105f8e57d56ee081abc). Later commits initially improved presentation and documentation. The HW 3 follow-up adds the required `/bedtime-test` alias, deterministic adapter demo tests, and recording instructions without changing production reminder policy.
 
 </details>

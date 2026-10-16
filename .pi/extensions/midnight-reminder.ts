@@ -43,10 +43,12 @@ export default function (pi: ExtensionAPI) {
 
   // Classroom demonstration command — shows the notification UI immediately
   // without affecting the real time-policy state.
-  pi.registerCommand("midnight-reminder-demo", {
-    description: "Demonstrate the midnight reminder notification (safe demo)",
-    handler: async (_name, ctx) => {
-      ctx.ui.notify("🌙 It's midnight — time for your reminder! (DEMO)", "info");
-    },
-  });
+  for (const name of ["bedtime-test", "midnight-reminder-demo"]) {
+    pi.registerCommand(name, {
+      description: "Demonstrate the midnight reminder notification (safe demo)",
+      handler: async (_name, ctx) => {
+        ctx.ui.notify("🌙 It's midnight — time for your reminder! (DEMO)", "info");
+      },
+    });
+  }
 }
